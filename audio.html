@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio - The New York Times</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Libre Franklin', Arial, sans-serif;
+            background: #fff;
+            color: #121212;
+            line-height: 1.5;
+        }
+
+        /* ===== SHARED STYLES ===== */
+        .utility-bar {
+            border-bottom: 1px solid #e2e2e2;
+            padding: 4px 0;
+        }
+        .utility-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .utility-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .hamburger-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .hamburger-btn span {
+            display: block;
+            width: 16px;
+            height: 2px;
+            background: #121212;
+        }
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .search-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        .edition-nav {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+        }
+        .edition-nav a {
+            color: #121212;
+            text-decoration: none;
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .edition-nav a:hover {
+            text-decoration: underline;
+        }
+        .utility-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .subscribe-btn {
+            background: #567b95;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .subscribe-btn:hover {
+            background: #4a6b82;
+        }
+        .login-link {
+            color: #121212;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        .info-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .date-info {
+            font-size: 11px;
+        }
+        .date-info .date {
+            font-weight: 600;
+            color: #121212;
+            margin-bottom: 2px;
+        }
+        .date-info .todays-paper {
+            color: #121212;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .date-info .todays-paper:hover {
+            text-decoration: underline;
+        }
+        .stock-ticker {
+            font-size: 11px;
+            color: #727272;
+            display: flex;
+            gap: 16px;
+        }
+        .stock-up { color: #2e7d32; }
+        .stock-down { color: #a81817; }
+
+        .logo-section {
+            text-align: center;
+            padding: 20px 0 12px;
+            border-bottom: 1px solid #121212;
+        }
+        .nyt-logo {
+            font-family: 'Old English Text MT', 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-size: 48px;
+            font-weight: normal;
+            text-decoration: none;
+            color: #121212;
+            display: inline-block;
+            letter-spacing: -1px;
+        }
+
+        .main-nav {
+            border-bottom: 1px solid #121212;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 100;
+        }
+        .main-nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 0;
+        }
+        .nav-links li {
+            position: relative;
+        }
+        .nav-links a {
+            display: block;
+            padding: 10px 14px;
+            color: #121212;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+        .nav-links a:hover {
+            background: #f7f7f7;
+        }
+        .nav-links a.active {
+            font-weight: 700;
+            border-bottom: 2px solid #121212;
+        }
+        .dropdown-arrow {
+            font-size: 7px;
+            margin-left: 2px;
+            opacity: 0.6;
+        }
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            border: 1px solid #e2e2e2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-width: 220px;
+            display: none;
+            z-index: 101;
+            padding: 8px 0;
+        }
+        .nav-links li:hover .dropdown {
+            display: block;
+        }
+        .dropdown a {
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 400;
+        }
+        .dropdown a:hover {
+            background: #f7f7f7;
+            text-decoration: underline;
+        }
+        .dropdown-divider {
+            border-top: 1px solid #e2e2e2;
+            margin: 6px 0;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid #121212;
+        }
+        .page-header h1 {
+            font-family: 'Old English Text MT', 'UnifrakturMaguntia', serif;
+            font-size: 36px;
+            font-weight: normal;
+        }
+        .page-header p {
+            font-family: Georgia, serif;
+            font-size: 16px;
+            color: #555;
+            margin-top: 8px;
+        }
+
+        /* ===== PODCASTS GRID ===== */
+        .podcasts-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+        .podcasts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 20px;
+        }
+        .podcast-card {
+            padding: 24px;
+            border: 1px solid #e2e2e2;
+            text-align: center;
+        }
+        .podcast-icon {
+            width: 80px;
+            height: 80px;
+            background: #121212;
+            border-radius: 12px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 32px;
+        }
+        .podcast-card h3 {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .podcast-card h3 a {
+            color: #121212;
+            text-decoration: none;
+        }
+        .podcast-card p {
+            font-family: Georgia, serif;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 12px;
+        }
+        .podcast-card .episode {
+            font-size: 12px;
+            color: #727272;
+        }
+        .listen-btn {
+            margin-top: 12px;
+            padding: 8px 20px;
+            background: #121212;
+            color: #fff;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+
+        /* ===== EPISODES LIST ===== */
+        .episodes-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            border-top: 4px double #121212;
+        }
+        .episodes-list {
+            margin-top: 20px;
+        }
+        .episode-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #e2e2e2;
+        }
+        .episode-play {
+            width: 50px;
+            height: 50px;
+            background: #121212;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .episode-play::after {
+            content: '▶';
+            margin-left: 3px;
+        }
+        .episode-info {
+            flex: 1;
+        }
+        .episode-info h4 {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .episode-info h4 a {
+            color: #121212;
+            text-decoration: none;
+        }
+        .episode-info p {
+            font-size: 14px;
+            color: #555;
+        }
+        .episode-meta {
+            font-size: 11px;
+            color: #727272;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 4px solid #121212;
+            margin-top: 60px;
+            padding: 40px 0 20px;
+            background: #f7f7f7;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-logo {
+            font-family: 'Old English Text MT', 'UnifrakturMaguntia', serif;
+            font-size: 26px;
+            margin-bottom: 24px;
+            color: #121212;
+        }
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .footer-column h5 {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+        .footer-column ul {
+            list-style: none;
+        }
+        .footer-column li {
+            margin-bottom: 6px;
+        }
+        .footer-column a {
+            color: #121212;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            border-top: 1px solid #e2e2e2;
+            padding-top: 20px;
+            font-size: 10px;
+            color: #727272;
+            text-align: center;
+        }
+        .footer-bottom a {
+            color: #727272;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .podcasts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-columns {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .edition-nav {
+                display: none;
+            }
+            .podcasts-grid {
+                grid-template-columns: 1fr;
+            }
+            .episode-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Utility Bar -->
+    <div class="utility-bar">
+        <div class="utility-content">
+            <div class="utility-left">
+                <button class="hamburger-btn" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <button class="search-btn" aria-label="Search">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="7" cy="7" r="5.5"/>
+                        <path d="M11 11l4 4"/>
+                    </svg>
+                </button>
+            </div>
+            <ul class="edition-nav">
+                <li><a href="us.html">U.S.</a></li>
+                <li><a href="international.html">International</a></li>
+                <li><a href="canada.html">Canada</a></li>
+                <li><a href="espanol.html">Español</a></li>
+                <li><a href="chinese.html">中文</a></li>
+            </ul>
+            <div class="utility-right">
+                <a href="#" class="login-link">Log In</a>
+                <button class="subscribe-btn">Subscribe for $1/Week</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Date & Stocks -->
+    <div class="info-bar">
+        <div class="date-info">
+            <div class="date">Thursday, May 14, 2026</div>
+            <a href="#" class="todays-paper">Today's Paper</a>
+        </div>
+        <div class="stock-ticker">
+            <span class="stock-up">Nasdaq +0.88%</span>
+            <span class="stock-up">S&P 500 +0.77%</span>
+            <span class="stock-down">Dow -0.15%</span>
+        </div>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo-section">
+        <a href="index.html" class="nyt-logo">The New York Times</a>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="main-nav-content">
+            <ul class="nav-links">
+                <li><a href="us.html">U.S. <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="us.html">U.S. News</a>
+                        <a href="us-politics.html">Politics</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="us.html">All U.S. News →</a>
+                    </div>
+                </li>
+                <li><a href="world.html">World <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="world.html">World News</a>
+                        <a href="africa.html">Africa</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="world.html">All World News →</a>
+                    </div>
+                </li>
+                <li><a href="business.html">Business <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="business.html">Business News</a>
+                        <a href="economy.html">Economy</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="business.html">All Business →</a>
+                    </div>
+                </li>
+                <li><a href="arts.html">Arts <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="arts.html">Arts</a>
+                        <a href="books.html">Books</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="arts.html">All Arts →</a>
+                    </div>
+                </li>
+                <li><a href="lifestyle.html">Lifestyle <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="lifestyle.html">Lifestyle</a>
+                        <a href="food.html">Food</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="lifestyle.html">All Lifestyle →</a>
+                    </div>
+                </li>
+                <li><a href="opinion.html">Opinion <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="opinion.html">Opinion</a>
+                        <a href="editorials.html">Editorials</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="opinion.html">All Opinion →</a>
+                    </div>
+                </li>
+                <li><a href="video.html">Video</a></li>
+                <li><a href="audio.html" class="active">Audio</a></li>
+                <li><a href="games.html">Games <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="wordle.html">Wordle</a>
+                        <a href="connections.html">Connections</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="games.html">All Games →</a>
+                    </div>
+                </li>
+                <li><a href="cooking.html">Cooking</a></li>
+                <li><a href="wirecutter.html">Wirecutter</a></li>
+                <li><a href="athletic.html">The Athletic</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Audio</h1>
+        <p>Podcasts, narrated articles and audio stories from The New York Times.</p>
+    </div>
+
+    <!-- Podcasts -->
+    <section class="podcasts-section">
+        <div class="section-label" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 16px;">Featured Podcasts</div>
+        <div class="podcasts-grid">
+            <article class="podcast-card">
+                <div class="podcast-icon">🎙️</div>
+                <h3><a href="#">The Daily</a></h3>
+                <p>Each morning, hear the biggest stories of our time from the journalists covering them.</p>
+                <div class="episode">Latest: The Future of Work</div>
+                <button class="listen-btn">Listen Now</button>
+            </article>
+            <article class="podcast-card">
+                <div class="podcast-icon">📰</div>
+                <h3><a href="#">The Argument</a></h3>
+                <p>Debate the news with columnists and guests from across the political spectrum.</p>
+                <div class="episode">Latest: Is Bipartisanship Dead?</div>
+                <button class="listen-btn">Listen Now</button>
+            </article>
+            <article class="podcast-card">
+                <div class="podcast-icon">🎧</div>
+                <h3><a href="#">Modern Love</a></h3>
+                <p>Stories of love, loss and redemption from the popular New York Times column.</p>
+                <div class="episode">Latest: A Second Chance at Love</div>
+                <button class="listen-btn">Listen Now</button>
+            </article>
+        </div>
+    </section>
+
+    <!-- Latest Episodes -->
+    <section class="episodes-section">
+        <div class="section-label" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 16px;">Latest Episodes</div>
+        <div class="episodes-list">
+            <div class="episode-item">
+                <div class="episode-play"></div>
+                <div class="episode-info">
+                    <h4><a href="#">The Daily: Inside the U.S.-China Trade War</a></h4>
+                    <p>How tariffs are reshaping the global economy.</p>
+                </div>
+                <div class="episode-meta">24 MIN • TODAY</div>
+            </div>
+            <div class="episode-item">
+                <div class="episode-play"></div>
+                <div class="episode-info">
+                    <h4><a href="#">The Argument: Can AI Be Regulated?</a></h4>
+                    <p>Experts debate the future of artificial intelligence governance.</p>
+                </div>
+                <div class="episode-meta">45 MIN • YESTERDAY</div>
+            </div>
+            <div class="episode-item">
+                <div class="episode-play"></div>
+                <div class="episode-info">
+                    <h4><a href="#">Modern Love: Finding Love After 60</a></h4>
+                    <p>A story of unexpected romance later in life.</p>
+                </div>
+                <div class="episode-meta">30 MIN • 2 D AGO</div>
+            </div>
+            <div class="episode-item">
+                <div class="episode-play"></div>
+                <div class="episode-info">
+                    <h4><a href="#">Popcast: Taylor Swift's New Era</a></h4>
+                    <p>Breaking down the superstar's latest album.</p>
+                </div>
+                <div class="episode-meta">55 MIN • 3 D AGO</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">The New York Times</div>
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h5>News</h5>
+                    <ul>
+                        <li><a href="us.html">U.S.</a></li>
+                        <li><a href="world.html">World</a></li>
+                        <li><a href="business.html">Business</a></li>
+                        <li><a href="tech.html">Tech</a></li>
+                        <li><a href="politics.html">Politics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Opinion</h5>
+                    <ul>
+                        <li><a href="opinion.html">Opinion</a></li>
+                        <li><a href="editorials.html">Editorials</a></li>
+                        <li><a href="guest-essays.html">Guest Essays</a></li>
+                        <li><a href="letters.html">Letters</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Arts</h5>
+                    <ul>
+                        <li><a href="arts.html">Arts</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="music.html">Music</a></li>
+                        <li><a href="theater.html">Theater</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Living</h5>
+                    <ul>
+                        <li><a href="lifestyle.html">Lifestyle</a></li>
+                        <li><a href="food.html">Food</a></li>
+                        <li><a href="travel.html">Travel</a></li>
+                        <li><a href="fashion.html">Fashion</a></li>
+                        <li><a href="real-estate.html">Real Estate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Games</h5>
+                    <ul>
+                        <li><a href="wordle.html">Wordle</a></li>
+                        <li><a href="connections.html">Connections</a></li>
+                        <li><a href="strands.html">Strands</a></li>
+                        <li><a href="crossword.html">Crossword</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>More</h5>
+                    <ul>
+                        <li><a href="cooking.html">Cooking</a></li>
+                        <li><a href="wirecutter.html">Wirecutter</a></li>
+                        <li><a href="athletic.html">The Athletic</a></li>
+                        <li><a href="video.html">Video</a></li>
+                        <li><a href="audio.html">Audio</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Work with us</a>
+                <a href="#">Advertise</a>
+                <span>© 2026 The New York Times Company</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
