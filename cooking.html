@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking - Recipes You Can Count On - The New York Times</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'NYT Cheltenham';
+            src: local('Georgia'), local('Times New Roman');
+            font-weight: 300 700;
+        }
+        
+        @font-face {
+            font-family: 'NYT Franklin';
+            src: local('Libre Franklin'), local('Arial');
+            font-weight: 300 800;
+        }
+
+        @font-face {
+            font-family: 'NYT Imperial';
+            src: local('Georgia'), local('Times New Roman');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --nyt-black: #121212;
+            --nyt-gray: #727272;
+            --nyt-light-gray: #e2e2e2;
+            --nyt-red: #a81817;
+            --nyt-blue: #567b95;
+            --nyt-bg: #f7f7f7;
+            --cooking-red: #cf1a1a;
+        }
+
+        body {
+            font-family: 'NYT Franklin', 'Libre Franklin', Arial, sans-serif;
+            background: #fff;
+            color: var(--nyt-black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== COOKING HEADER ===== */
+        .cooking-header {
+            background: var(--cooking-red);
+            color: #fff;
+            padding: 12px 0;
+        }
+
+        .cooking-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cooking-logo {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .cooking-logo span {
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .cooking-nav {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .cooking-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .cooking-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .cooking-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .cooking-search svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ===== SUB NAV ===== */
+        .sub-nav {
+            border-bottom: 1px solid var(--nyt-light-gray);
+            padding: 10px 0;
+            background: #fff;
+        }
+
+        .sub-nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .sub-nav-content a {
+            color: var(--nyt-black);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .sub-nav-content a:hover {
+            color: var(--cooking-red);
+        }
+
+        /* ===== HERO RECIPE ===== */
+        .hero-recipe {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .hero-content {
+            padding: 20px 0;
+        }
+
+        .recipe-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--cooking-red);
+            margin-bottom: 12px;
+        }
+
+        .hero-content h1 {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: var(--nyt-black);
+        }
+
+        .hero-content h1 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .hero-content h1 a:hover {
+            color: var(--cooking-red);
+        }
+
+        .hero-description {
+            font-family: 'NYT Imperial', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 24px;
+        }
+
+        .recipe-meta {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: var(--nyt-gray);
+        }
+
+        .recipe-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .recipe-meta svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .recipe-author {
+            font-size: 13px;
+            color: var(--nyt-gray);
+            margin-bottom: 20px;
+        }
+
+        .recipe-author a {
+            color: var(--nyt-black);
+            text-decoration: underline;
+            text-decoration-color: var(--nyt-light-gray);
+        }
+
+        .save-recipe-btn {
+            background: var(--cooking-red);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: 'NYT Franklin', sans-serif;
+        }
+
+        .save-recipe-btn:hover {
+            background: #a81817;
+        }
+
+        /* ===== FEATURED COLLECTIONS ===== */
+        .collections-section {
+            background: var(--nyt-bg);
+            padding: 48px 0;
+        }
+
+        .collections-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .section-title a {
+            color: var(--nyt-black);
+            text-decoration: none;
+        }
+
+        .view-all {
+            color: var(--cooking-red);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .view-all:hover {
+            text-decoration: underline;
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .collection-card {
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .collection-info {
+            padding: 16px;
+        }
+
+        .collection-info h3 {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .collection-info h3 a {
+            color: var(--nyt-black);
+            text-decoration: none;
+        }
+
+        .collection-info p {
+            font-size: 13px;
+            color: var(--nyt-gray);
+        }
+
+        .recipe-count {
+            font-size: 12px;
+            color: var(--cooking-red);
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* ===== TRENDING RECIPES ===== */
+        .trending-section {
+            max-width: 1200px;
+            margin: 48px auto;
+            padding: 0 20px;
+        }
+
+        .trending-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 24px;
+        }
+
+        .trending-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trending-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 14px;
+        }
+
+        .trending-card h3 {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+
+        .trending-card h3 a {
+            color: var(--nyt-black);
+            text-decoration: none;
+        }
+
+        .trending-card h3 a:hover {
+            color: var(--cooking-red);
+        }
+
+        .trending-card p {
+            font-family: 'NYT Imperial', Georgia, serif;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .trending-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--nyt-gray);
+        }
+
+        /* ===== NEWSLETTER BANNER ===== */
+        .newsletter-banner {
+            background: var(--nyt-black);
+            color: #fff;
+            padding: 48px 0;
+            margin-top: 48px;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .newsletter-content h2 {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .newsletter-content p {
+            font-size: 16px;
+            color: #aaa;
+            margin-bottom: 24px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .newsletter-form input {
+            padding: 12px 16px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            width: 280px;
+            font-family: 'NYT Franklin', sans-serif;
+        }
+
+        .newsletter-form button {
+            background: var(--cooking-red);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: 'NYT Franklin', sans-serif;
+        }
+
+        /* ===== SEASONAL SECTION ===== */
+        .seasonal-section {
+            max-width: 1200px;
+            margin: 48px auto;
+            padding: 0 20px;
+        }
+
+        .seasonal-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .seasonal-feature {
+            position: relative;
+        }
+
+        .seasonal-feature img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .seasonal-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px 24px 24px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            border-radius: 0 0 4px 4px;
+        }
+
+        .seasonal-overlay h3 {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .seasonal-overlay h3 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .seasonal-overlay p {
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        .seasonal-card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .seasonal-card h4 {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .seasonal-card h4 a {
+            color: var(--nyt-black);
+            text-decoration: none;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 4px solid var(--nyt-black);
+            margin-top: 60px;
+            padding: 40px 0 20px;
+            background: var(--nyt-bg);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            font-family: 'Old English Text MT', 'UnifrakturMaguntia', serif;
+            font-size: 26px;
+            margin-bottom: 24px;
+            color: var(--nyt-black);
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .footer-column h5 {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+            color: var(--nyt-black);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 6px;
+        }
+
+        .footer-column a {
+            color: var(--nyt-black);
+            text-decoration: none;
+            font-size: 12px;
+            font-family: 'NYT Franklin', sans-serif;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--nyt-light-gray);
+            padding-top: 20px;
+            font-size: 10px;
+            color: var(--nyt-gray);
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+        }
+
+        .footer-bottom a {
+            color: var(--nyt-gray);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== NYT BACK LINK ===== */
+        .nyt-back {
+            background: var(--nyt-black);
+            color: #fff;
+            padding: 8px 0;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .nyt-back a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .nyt-back a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-recipe {
+                grid-template-columns: 1fr;
+            }
+            .hero-image {
+                height: 350px;
+            }
+            .collections-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .trending-grid {
+                grid-template-columns: 1fr;
+            }
+            .seasonal-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-columns {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cooking-nav {
+                display: none;
+            }
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter-form input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NYT Back Link -->
+    <div class="nyt-back">
+        <a href="index.html">← Back to The New York Times</a>
+    </div>
+
+    <!-- Cooking Header -->
+    <header class="cooking-header">
+        <div class="cooking-header-content">
+            <a href="cooking.html" class="cooking-logo">NYT <span>Cooking</span></a>
+            <nav>
+                <ul class="cooking-nav">
+                    <li><a href="cooking.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="guides.html">Guides</a></li>
+                    <li><a href="authors.html">Authors</a></li>
+                    <li><a href="pantry.html">Your Pantry</a></li>
+                    <li><a href="saved.html">Saved Recipes</a></li>
+                </ul>
+            </nav>
+            <button class="cooking-search">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="7" cy="7" r="5.5"/>
+                    <path d="M11 11l4 4"/>
+                </svg>
+                Search
+            </button>
+        </div>
+    </header>
+
+    <!-- Sub Navigation -->
+    <nav class="sub-nav">
+        <ul class="sub-nav-content">
+            <li><a href="weeknight.html">Weeknight</a></li>
+            <li><a href="dinner.html">Dinner</a></li>
+            <li><a href="desserts.html">Desserts</a></li>
+            <li><a href="vegetarian.html">Vegetarian</a></li>
+            <li><a href="chicken.html">Chicken</a></li>
+            <li><a href="pasta.html">Pasta</a></li>
+            <li><a href="healthy.html">Healthy</a></li>
+            <li><a href="quick.html">Quick</a></li>
+            <li><a href="spring.html">Spring</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Recipe -->
+    <section class="hero-recipe">
+        <img src="https://static01.nyt.com/images/2026/05/14/dining/14cooking-hero/14cooking-hero-superJumbo.jpg" alt="Spring Vegetable Risotto" class="hero-image">
+        <div class="hero-content">
+            <div class="recipe-label">Recipe of the Day</div>
+            <h1><a href="#">Spring Vegetable Risotto With Asparagus and Peas</a></h1>
+            <p class="hero-description">Creamy, comforting and packed with the bright flavors of spring. This risotto celebrates the season's best produce with tender asparagus, sweet peas and fresh herbs.</p>
+            <div class="recipe-meta">
+                <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    45 min
+                </span>
+                <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    4 servings
+                </span>
+                <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    4.8 ★
+                </span>
+            </div>
+            <div class="recipe-author">By <a href="#">Alison Roman</a></div>
+            <button class="save-recipe-btn">Save to Recipe Box</button>
+        </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="collections-section">
+        <div class="collections-content">
+            <div class="section-header">
+                <h2 class="section-title"><a href="#">Featured Collections</a></h2>
+                <a href="#" class="view-all">View All →</a>
+            </div>
+            <div class="collections-grid">
+                <article class="collection-card">
+                    <img src="https://static01.nyt.com/images/2026/05/14/dining/14collection-weeknight/14collection-weeknight-mediumThreeByTwo440.jpg" alt="Weeknight Dinners">
+                    <div class="collection-info">
+                        <h3><a href="#">Easy Weeknight Dinners</a></h3>
+                        <p>Simple, satisfying meals for busy evenings</p>
+                        <div class="recipe-count">142 recipes</div>
+                    </div>
+                </article>
+                <article class="collection-card">
+                    <img src="https://static01.nyt.com/images/2026/05/14/dining/14collection-spring/14collection-spring-mediumThreeByTwo440.jpg" alt="Spring Recipes">
+                    <div class="collection-info">
+                        <h3><a href="#">Best of Spring</a></h3>
+                        <p>Celebrate the season's freshest flavors</p>
+                        <div class="recipe-count">86 recipes</div>
+                    </div>
+                </article>
+                <article class="collection-card">
+                    <img src="https://static01.nyt.com/images/2026/05/14/dining/14collection-vegetarian/14collection-vegetarian-mediumThreeByTwo440.jpg" alt="Vegetarian">
+                    <div class="collection-info">
+                        <h3><a href="#">Vegetarian Favorites</a></h3>
+                        <p>Plant-based dishes that satisfy</p>
+                        <div class="recipe-count">203 recipes</div>
+                    </div>
+                </article>
+                <article class="collection-card">
+                    <img src="https://static01.nyt.com/images/2026/05/14/dining/14collection-desserts/14collection-desserts-mediumThreeByTwo440.jpg" alt="Desserts">
+                    <div class="collection-info">
+                        <h3><a href="#">Weekend Baking Projects</a></h3>
+                        <p>Sweet treats worth the effort</p>
+                        <div class="recipe-count">95 recipes</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Recipes -->
+    <section class="trending-section">
+        <div class="section-header">
+            <h2 class="section-title"><a href="#">Trending Now</a></h2>
+            <a href="#" class="view-all">View All →</a>
+        </div>
+        <div class="trending-grid">
+            <article class="trending-card">
+                <img src="https://static01.nyt.com/images/2026/05/14/dining/14trending-pasta/14trending-pasta-mediumThreeByTwo440.jpg" alt="Pasta">
+                <h3><a href="#">Cacio e Pepe</a></h3>
+                <p>The classic Roman pasta dish with pecorino and black pepper. Simple ingredients, extraordinary flavor.</p>
+                <div class="trending-meta">
+                    <span>25 min</span>
+                    <span>4.9 ★</span>
+                    <span>By Mark Bittman</span>
+                </div>
+            </article>
+            <article class="trending-card">
+                <img src="https://static01.nyt.com/images/2026/05/14/dining/14trending-chicken/14trending-chicken-mediumThreeByTwo440.jpg" alt="Chicken">
+                <h3><a href="#">Crispy Chicken Thighs With Lemon and Garlic</a></h3>
+                <p>Golden, crunchy skin and juicy meat. A weeknight staple that feels special.</p>
+                <div class="trending-meta">
+                    <span>40 min</span>
+                    <span>4.7 ★</span>
+                    <span>By Melissa Clark</span>
+                </div>
+            </article>
+            <article class="trending-card">
+                <img src="https://static01.nyt.com/images/2026/05/14/dining/14trending-salad/14trending-salad-mediumThreeByTwo440.jpg" alt="Salad">
+                <h3><a href="#">Mediterranean Grain Bowl</a></h3>
+                <p>Loaded with chickpeas, feta, cucumbers and a bright lemon-tahini dressing.</p>
+                <div class="trending-meta">
+                    <span>20 min</span>
+                    <span>4.6 ★</span>
+                    <span>By Yewande Komolafe</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Seasonal Section -->
+    <section class="seasonal-section">
+        <div class="section-header">
+            <h2 class="section-title"><a href="#">Spring Entertaining</a></h2>
+            <a href="#" class="view-all">View All →</a>
+        </div>
+        <div class="seasonal-grid">
+            <article class="seasonal-feature">
+                <img src="https://static01.nyt.com/images/2026/05/14/dining/14seasonal-hero/14seasonal-hero-superJumbo.jpg" alt="Spring dinner party">
+                <div class="seasonal-overlay">
+                    <h3><a href="#">The Ultimate Spring Dinner Party Menu</a></h3>
+                    <p>A complete guide to hosting the perfect spring gathering</p>
+                </div>
+            </article>
+            <article class="seasonal-card">
+                <img src="https://static01.nyt.com/images/2026/05/14/dining/14seasonal-side/14seasonal-side-mediumThreeByTwo440.jpg" alt="Side dish">
+                <h4><a href="#">Roasted Asparagus With Lemon Zest</a></h4>
+            </article>
+            <article class="seasonal-card">
+                <img src="https://static01.nyt.com/images/2026/05/14/dining/14seasonal-dessert/14seasonal-dessert-mediumThreeByTwo440.jpg" alt="Dessert">
+                <h4><a href="#">Strawberry-Rhubarb Crisp</a></h4>
+            </article>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter-banner">
+        <div class="newsletter-content">
+            <h2>Get Our Best Recipes in Your Inbox</h2>
+            <p>Subscribe to The New York Times Cooking newsletter for weekly inspiration.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address">
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">The New York Times</div>
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h5>News</h5>
+                    <ul>
+                        <li><a href="us.html">U.S.</a></li>
+                        <li><a href="world.html">World</a></li>
+                        <li><a href="business.html">Business</a></li>
+                        <li><a href="tech.html">Tech</a></li>
+                        <li><a href="politics.html">Politics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Opinion</h5>
+                    <ul>
+                        <li><a href="opinion.html">Opinion</a></li>
+                        <li><a href="editorials.html">Editorials</a></li>
+                        <li><a href="guest-essays.html">Guest Essays</a></li>
+                        <li><a href="letters.html">Letters</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Arts</h5>
+                    <ul>
+                        <li><a href="arts.html">Arts</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="music.html">Music</a></li>
+                        <li><a href="theater.html">Theater</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Living</h5>
+                    <ul>
+                        <li><a href="lifestyle.html">Lifestyle</a></li>
+                        <li><a href="food.html">Food</a></li>
+                        <li><a href="travel.html">Travel</a></li>
+                        <li><a href="fashion.html">Fashion</a></li>
+                        <li><a href="real-estate.html">Real Estate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Games</h5>
+                    <ul>
+                        <li><a href="wordle.html">Wordle</a></li>
+                        <li><a href="connections.html">Connections</a></li>
+                        <li><a href="strands.html">Strands</a></li>
+                        <li><a href="crossword.html">Crossword</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>More</h5>
+                    <ul>
+                        <li><a href="cooking.html">Cooking</a></li>
+                        <li><a href="wirecutter.html">Wirecutter</a></li>
+                        <li><a href="athletic.html">The Athletic</a></li>
+                        <li><a href="video.html">Video</a></li>
+                        <li><a href="audio.html">Audio</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Work with us</a>
+                <a href="#">Advertise</a>
+                <span>© 2026 The New York Times Company</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
