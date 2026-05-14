@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.S. Politics - The New York Times</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'NYT Cheltenham';
+            src: local('Georgia'), local('Times New Roman');
+            font-weight: 300 700;
+        }
+        
+        @font-face {
+            font-family: 'NYT Franklin';
+            src: local('Libre Franklin'), local('Arial');
+            font-weight: 300 800;
+        }
+
+        @font-face {
+            font-family: 'NYT Imperial';
+            src: local('Georgia'), local('Times New Roman');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --nyt-black: #121212;
+            --nyt-gray: #727272;
+            --nyt-light-gray: #e2e2e2;
+            --nyt-red: #a81817;
+            --nyt-blue: #567b95;
+            --nyt-bg: #f7f7f7;
+        }
+
+        body {
+            font-family: 'NYT Franklin', 'Libre Franklin', Arial, sans-serif;
+            background: #fff;
+            color: var(--nyt-black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== TOP UTILITY BAR ===== */
+        .utility-bar {
+            border-bottom: 1px solid var(--nyt-light-gray);
+            padding: 4px 0;
+        }
+
+        .utility-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .utility-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .hamburger-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 16px;
+            height: 2px;
+            background: var(--nyt-black);
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .search-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .edition-nav {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+        }
+
+        .edition-nav a {
+            color: var(--nyt-black);
+            text-decoration: none;
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .edition-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .utility-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .subscribe-btn {
+            background: var(--nyt-blue);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-family: 'NYT Franklin', sans-serif;
+        }
+
+        .subscribe-btn:hover {
+            background: #4a6b82;
+        }
+
+        .login-link {
+            color: var(--nyt-black);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== DATE & STOCKS BAR ===== */
+        .info-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date-info {
+            font-size: 11px;
+        }
+
+        .date-info .date {
+            font-weight: 600;
+            color: var(--nyt-black);
+            margin-bottom: 2px;
+        }
+
+        .date-info .todays-paper {
+            color: var(--nyt-black);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .date-info .todays-paper:hover {
+            text-decoration: underline;
+        }
+
+        .stock-ticker {
+            font-size: 11px;
+            color: var(--nyt-gray);
+            display: flex;
+            gap: 16px;
+        }
+
+        .stock-up { color: #2e7d32; }
+        .stock-down { color: var(--nyt-red); }
+
+        /* ===== LOGO SECTION ===== */
+        .logo-section {
+            text-align: center;
+            padding: 20px 0 12px;
+            border-bottom: 1px solid var(--nyt-black);
+        }
+
+        .nyt-logo {
+            font-family: 'Old English Text MT', 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-size: 48px;
+            font-weight: normal;
+            text-decoration: none;
+            color: var(--nyt-black);
+            display: inline-block;
+            letter-spacing: -1px;
+        }
+
+        /* ===== MAIN NAVIGATION ===== */
+        .main-nav {
+            border-bottom: 1px solid var(--nyt-black);
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 100;
+        }
+
+        .main-nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 0;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 10px 14px;
+            color: var(--nyt-black);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            background: var(--nyt-bg);
+        }
+
+        .dropdown-arrow {
+            font-size: 7px;
+            margin-left: 2px;
+            opacity: 0.6;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            border: 1px solid var(--nyt-light-gray);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-width: 220px;
+            display: none;
+            z-index: 101;
+            padding: 8px 0;
+        }
+
+        .nav-links li:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown a {
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 400;
+            border-bottom: none;
+        }
+
+        .dropdown a:hover {
+            background: var(--nyt-bg);
+            text-decoration: underline;
+        }
+
+        .dropdown-divider {
+            border-top: 1px solid var(--nyt-light-gray);
+            margin: 6px 0;
+        }
+
+        /* ===== SECTION HEADER ===== */
+        .section-header {
+            background: var(--nyt-black);
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .section-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header h1 {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'NYT Imperial', Georgia, serif;
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== SUB NAVIGATION ===== */
+        .sub-nav {
+            border-bottom: 2px solid var(--nyt-black);
+            padding: 0;
+            background: #fff;
+        }
+
+        .sub-nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 0;
+            list-style: none;
+        }
+
+        .sub-nav-content li {
+            position: relative;
+        }
+
+        .sub-nav-content a {
+            display: block;
+            padding: 14px 20px;
+            color: var(--nyt-black);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .sub-nav-content a:hover,
+        .sub-nav-content a.active {
+            border-bottom-color: var(--nyt-black);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .primary-column {
+            border-right: 1px solid var(--nyt-light-gray);
+            padding-right: 40px;
+        }
+
+        .secondary-column {
+            padding-left: 10px;
+        }
+
+        /* ===== HERO ARTICLE ===== */
+        .hero-article {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--nyt-black);
+        }
+
+        .hero-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--nyt-red);
+            margin-bottom: 10px;
+        }
+
+        .hero-article h2 {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 14px;
+        }
+
+        .hero-article h2 a {
+            color: var(--nyt-black);
+            text-decoration: none;
+        }
+
+        .hero-article h2 a:hover {
+            color: #555;
+        }
+
+        .article-summary {
+            font-family: 'NYT Imperial', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .article-byline {
+            font-size: 12px;
+            color: var(--nyt-gray);
+            margin-bottom: 6px;
+        }
+
+        .article-byline a {
+            color: var(--nyt-gray);
+            text-decoration: underline;
+            text-decoration-color: var(--nyt-light-gray);
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: var(--nyt-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            margin-top: 16px;
+        }
+
+        .image-caption {
+            font-size: 12px;
+            color: var(--nyt-gray);
+            margin-top: 6px;
+            text-align: right;
+            font-family: 'NYT Imperial', Georgia, serif;
+        }
+
+        .image-credit {
+            font-size: 10px;
+            color: #999;
+            margin-top: 2px;
+            text-align: right;
+        }
+
+        /* ===== ARTICLE LIST ===== */
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .article-item {
+            display: grid;
+            grid-template-columns: 1fr 200px;
+            gap: 20px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--nyt-light-gray);
+        }
+
+        .article-item:last-child {
+            border-bottom: none;
+        }
+
+        .article-content h3 {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+
+        .article-content h3 a {
+            color: var(--nyt-black);
+            text-decoration: none;
+        }
+
+        .article-content h3 a:hover {
+            color: #555;
+        }
+
+        .article-content p {
+            font-family: 'NYT Imperial', Georgia, serif;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .article-content .meta {
+            font-size: 11px;
+            color: var(--nyt-gray);
+            text-transform: uppercase;
+        }
+
+        .article-thumb {
+            width: 200px;
+            height: 133px;
+            object-fit: cover;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar-section {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--nyt-light-gray);
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-title a {
+            color: var(--nyt-gray);
+            text-decoration: none;
+            font-size: 11px;
+        }
+
+        .sidebar-story {
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--nyt-light-gray);
+        }
+
+        .sidebar-story:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .sidebar-story h4 {
+            font-family: 'NYT Cheltenham', Georgia, serif;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .sidebar-story h4 a {
+            color: var(--nyt-black);
+            text-decoration: none;
+        }
+
+        .sidebar-story h4 a:hover {
+            color: #555;
+        }
+
+        .sidebar-story p {
+            font-family: 'NYT Imperial', Georgia, serif;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .sidebar-meta {
+            font-size: 11px;
+            color: var(--nyt-gray);
+            margin-top: 6px;
+            text-transform: uppercase;
+        }
+
+        /* ===== TRENDING TOPICS ===== */
+        .trending-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .topic-tag {
+            background: var(--nyt-bg);
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--nyt-black);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .topic-tag:hover {
+            background: var(--nyt-light-gray);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 4px solid var(--nyt-black);
+            margin-top: 60px;
+            padding: 40px 0 20px;
+            background: var(--nyt-bg);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            font-family: 'Old English Text MT', 'UnifrakturMaguntia', serif;
+            font-size: 26px;
+            margin-bottom: 24px;
+            color: var(--nyt-black);
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .footer-column h5 {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+            color: var(--nyt-black);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 6px;
+        }
+
+        .footer-column a {
+            color: var(--nyt-black);
+            text-decoration: none;
+            font-size: 12px;
+            font-family: 'NYT Franklin', sans-serif;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--nyt-light-gray);
+            padding-top: 20px;
+            font-size: 10px;
+            color: var(--nyt-gray);
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+        }
+
+        .footer-bottom a {
+            color: var(--nyt-gray);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .primary-column {
+                border-right: none;
+                padding-right: 0;
+            }
+            .article-item {
+                grid-template-columns: 1fr;
+            }
+            .article-thumb {
+                width: 100%;
+                height: 200px;
+            }
+            .footer-columns {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .edition-nav {
+                display: none;
+            }
+            .section-header h1 {
+                font-size: 36px;
+            }
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Utility Bar -->
+    <div class="utility-bar">
+        <div class="utility-content">
+            <div class="utility-left">
+                <button class="hamburger-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button class="search-btn" aria-label="Search">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="7" cy="7" r="5.5"/>
+                        <path d="M11 11l4 4"/>
+                    </svg>
+                </button>
+            </div>
+            <ul class="edition-nav">
+                <li><a href="us.html">U.S.</a></li>
+                <li><a href="international.html">International</a></li>
+                <li><a href="canada.html">Canada</a></li>
+                <li><a href="espanol.html">Español</a></li>
+                <li><a href="chinese.html">中文</a></li>
+            </ul>
+            <div class="utility-right">
+                <a href="#" class="login-link">Log In</a>
+                <button class="subscribe-btn">Subscribe for $1/Week</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Date & Stocks -->
+    <div class="info-bar">
+        <div class="date-info">
+            <div class="date">Thursday, May 14, 2026</div>
+            <a href="#" class="todays-paper">Today's Paper</a>
+        </div>
+        <div class="stock-ticker">
+            <span class="stock-up">Nasdaq +0.88%</span>
+            <span class="stock-up">S&P 500 +0.77%</span>
+            <span class="stock-down">Dow -0.15%</span>
+        </div>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo-section">
+        <a href="index.html" class="nyt-logo">The New York Times</a>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="main-nav-content">
+            <ul class="nav-links">
+                <li>
+                    <a href="us.html">U.S. <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="us.html">U.S. News</a>
+                        <a href="us-politics.html">Politics</a>
+                        <a href="us-elections.html">Elections 2026</a>
+                        <a href="us-education.html">Education</a>
+                        <a href="us-health.html">Health</a>
+                        <a href="us-immigration.html">Immigration</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="us.html">All U.S. News →</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="world.html">World <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="world.html">World News</a>
+                        <a href="africa.html">Africa</a>
+                        <a href="americas.html">Americas</a>
+                        <a href="asia.html">Asia</a>
+                        <a href="australia.html">Australia</a>
+                        <a href="europe.html">Europe</a>
+                        <a href="middle-east.html">Middle East</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="world.html">All World News →</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="business.html">Business <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="business.html">Business News</a>
+                        <a href="economy.html">Economy</a>
+                        <a href="tech.html">Tech</a>
+                        <a href="markets.html">Markets</a>
+                        <a href="media.html">Media</a>
+                        <a href="personal-tech.html">Personal Tech</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="business.html">All Business →</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="arts.html">Arts <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="arts.html">Arts</a>
+                        <a href="design.html">Design</a>
+                        <a href="books.html">Books</a>
+                        <a href="dance.html">Dance</a>
+                        <a href="movies.html">Movies</a>
+                        <a href="music.html">Music</a>
+                        <a href="theater.html">Theater</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="arts.html">All Arts →</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="lifestyle.html">Lifestyle <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="lifestyle.html">Lifestyle</a>
+                        <a href="food.html">Food</a>
+                        <a href="travel.html">Travel</a>
+                        <a href="fashion.html">Fashion & Style</a>
+                        <a href="real-estate.html">Real Estate</a>
+                        <a href="well.html">Well</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="lifestyle.html">All Lifestyle →</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="opinion.html">Opinion <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="opinion.html">Opinion</a>
+                        <a href="editorials.html">Editorials</a>
+                        <a href="guest-essays.html">Guest Essays</a>
+                        <a href="letters.html">Letters</a>
+                        <a href="opinion-video.html">Opinion Video</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="opinion.html">All Opinion →</a>
+                    </div>
+                </li>
+                <li><a href="video.html">Video</a></li>
+                <li><a href="audio.html">Audio</a></li>
+                <li>
+                    <a href="games.html">Games <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="wordle.html">Wordle</a>
+                        <a href="connections.html">Connections</a>
+                        <a href="strands.html">Strands</a>
+                        <a href="crossword.html">Crossword</a>
+                        <a href="spelling-bee.html">Spelling Bee</a>
+                        <a href="sudoku.html">Sudoku</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="games.html">All Games →</a>
+                    </div>
+                </li>
+                <li><a href="cooking.html">Cooking</a></li>
+                <li><a href="wirecutter.html">Wirecutter</a></li>
+                <li><a href="athletic.html">The Athletic</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Section Header -->
+    <header class="section-header">
+        <div class="section-header-content">
+            <div class="breadcrumb"><a href="index.html">Home</a> / <a href="us.html">U.S.</a> / Politics</div>
+            <h1>U.S. Politics</h1>
+            <p>Comprehensive coverage of American politics, from the White House to Capitol Hill and beyond.</p>
+        </div>
+    </header>
+
+    <!-- Sub Navigation -->
+    <nav class="sub-nav">
+        <ul class="sub-nav-content">
+            <li><a href="us-politics.html" class="active">All Politics</a></li>
+            <li><a href="us-elections.html">Elections 2026</a></li>
+            <li><a href="us-education.html">Education</a></li>
+            <li><a href="us-health.html">Health</a></li>
+            <li><a href="us-immigration.html">Immigration</a></li>
+            <li><a href="#">Congress</a></li>
+            <li><a href="#">Supreme Court</a></li>
+            <li><a href="#">White House</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Primary Column -->
+        <div class="primary-column">
+            <!-- Hero Article -->
+            <article class="hero-article">
+                <div class="hero-label">Breaking News</div>
+                <h2><a href="#">Trump Administration Announces Sweeping New Tariffs on Chinese Imports</a></h2>
+                <p class="article-summary">The White House unveiled a new round of tariffs targeting $200 billion in Chinese goods, escalating trade tensions and drawing sharp criticism from both Democrats and some Republicans on Capitol Hill.</p>
+                <div class="article-byline">By <a href="#">Ana Swanson</a> and <a href="#">Jim Tankersley</a></div>
+                <div class="article-meta">8 MIN READ • Updated 12m ago</div>
+                <img src="https://static01.nyt.com/images/2026/05/14/us/politics/14politics-hero/14politics-hero-superJumbo.jpg" alt="White House press briefing" class="hero-image">
+                <div class="image-caption">Press Secretary Karoline Leavitt speaks to reporters at the White House on Thursday.</div>
+                <div class="image-credit">Doug Mills/The New York Times</div>
+            </article>
+
+            <!-- Article List -->
+            <div class="article-list">
+                <article class="article-item">
+                    <div class="article-content">
+                        <h3><a href="#">Senate Democrats Block Republican Budget Proposal in Late-Night Vote</a></h3>
+                        <p>The partisan standoff threatens to delay key legislative priorities as the fiscal year deadline approaches.</p>
+                        <div class="meta">5 MIN READ • By Carl Hulse</div>
+                    </div>
+                    <img src="https://static01.nyt.com/images/2026/05/14/us/politics/14senate/14senate-mediumThreeByTwo440.jpg" alt="Senate floor" class="article-thumb">
+                </article>
+
+                <article class="article-item">
+                    <div class="article-content">
+                        <h3><a href="#">Supreme Court to Hear Major Case on Presidential Power</a></h3>
+                        <p>The case could redefine the limits of executive authority and has implications for future administrations.</p>
+                        <div class="meta">6 MIN READ • By Adam Liptak</div>
+                    </div>
+                    <img src="https://static01.nyt.com/images/2026/05/14/us/politics/14scotus/14scotus-mediumThreeByTwo440.jpg" alt="Supreme Court building" class="article-thumb">
+                </article>
+
+                <article class="article-item">
+                    <div class="article-content">
+                        <h3><a href="#">GOP Governors Push Back on Federal Education Mandates</a></h3>
+                        <p>A coalition of Republican-led states is challenging new Department of Education requirements.</p>
+                        <div class="meta">4 MIN READ • By Dana Goldstein</div>
+                    </div>
+                    <img src="https://static01.nyt.com/images/2026/05/14/us/politics/14governors/14governors-mediumThreeByTwo440.jpg" alt="Governors meeting" class="article-thumb">
+                </article>
+
+                <article class="article-item">
+                    <div class="article-content">
+                        <h3><a href="#">Campaign Finance Reform Bill Stalls in Committee</a></h3>
+                        <p>Democrats vow to bring the legislation to the floor despite Republican opposition.</p>
+                        <div class="meta">7 MIN READ • By Nicholas Fandos</div>
+                    </div>
+                    <img src="https://static01.nyt.com/images/2026/05/14/us/politics/14campaign/14campaign-mediumThreeByTwo440.jpg" alt="Campaign finance" class="article-thumb">
+                </article>
+            </div>
+        </div>
+
+        <!-- Secondary Column -->
+        <aside class="secondary-column">
+            <!-- Most Popular -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Most Popular in Politics <a href="#">View All →</a></div>
+                <div class="sidebar-story">
+                    <h4><a href="#">Analysis: What the Latest Polls Tell Us About 2026</a></h4>
+                    <p>Early indicators suggest a competitive midterm environment.</p>
+                    <div class="sidebar-meta">TRENDING</div>
+                </div>
+                <div class="sidebar-story">
+                    <h4><a href="#">The Power Players Shaping Trump's Second Term</a></h4>
+                    <p>A look at the key figures in the administration's inner circle.</p>
+                    <div class="sidebar-meta">FEATURE</div>
+                </div>
+                <div class="sidebar-story">
+                    <h4><a href="#">Fact-Check: Claims From the Latest GOP Debate</a></h4>
+                    <p>Our reporters verify the statements made by candidates.</p>
+                    <div class="sidebar-meta">FACT CHECK</div>
+                </div>
+            </div>
+
+            <!-- Trending Topics -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Trending Topics</div>
+                <div class="trending-topics">
+                    <a href="#" class="topic-tag">Trump Administration</a>
+                    <a href="#" class="topic-tag">2026 Elections</a>
+                    <a href="#" class="topic-tag">Congress</a>
+                    <a href="#" class="topic-tag">Supreme Court</a>
+                    <a href="#" class="topic-tag">Immigration</a>
+                    <a href="#" class="topic-tag">Healthcare</a>
+                    <a href="#" class="topic-tag">Climate Policy</a>
+                    <a href="#" class="topic-tag">Tax Reform</a>
+                </div>
+            </div>
+
+            <!-- Opinion -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Opinion <a href="#">View All →</a></div>
+                <div class="sidebar-story">
+                    <h4><a href="#">The Real Crisis in American Democracy</a></h4>
+                    <p>David Brooks on why our institutions are failing us.</p>
+                    <div class="sidebar-meta">DAVID BROOKS</div>
+                </div>
+                <div class="sidebar-story">
+                    <h4><a href="#">Why Bipartisanship Is Still Possible</a></h4>
+                    <p>Despite the rhetoric, common ground exists on key issues.</p>
+                    <div class="sidebar-meta">GUEST ESSAY</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">The New York Times</div>
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h5>News</h5>
+                    <ul>
+                        <li><a href="us.html">U.S.</a></li>
+                        <li><a href="world.html">World</a></li>
+                        <li><a href="business.html">Business</a></li>
+                        <li><a href="tech.html">Tech</a></li>
+                        <li><a href="politics.html">Politics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Opinion</h5>
+                    <ul>
+                        <li><a href="opinion.html">Opinion</a></li>
+                        <li><a href="editorials.html">Editorials</a></li>
+                        <li><a href="guest-essays.html">Guest Essays</a></li>
+                        <li><a href="letters.html">Letters</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Arts</h5>
+                    <ul>
+                        <li><a href="arts.html">Arts</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="music.html">Music</a></li>
+                        <li><a href="theater.html">Theater</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Living</h5>
+                    <ul>
+                        <li><a href="lifestyle.html">Lifestyle</a></li>
+                        <li><a href="food.html">Food</a></li>
+                        <li><a href="travel.html">Travel</a></li>
+                        <li><a href="fashion.html">Fashion</a></li>
+                        <li><a href="real-estate.html">Real Estate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Games</h5>
+                    <ul>
+                        <li><a href="wordle.html">Wordle</a></li>
+                        <li><a href="connections.html">Connections</a></li>
+                        <li><a href="strands.html">Strands</a></li>
+                        <li><a href="crossword.html">Crossword</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>More</h5>
+                    <ul>
+                        <li><a href="cooking.html">Cooking</a></li>
+                        <li><a href="wirecutter.html">Wirecutter</a></li>
+                        <li><a href="athletic.html">The Athletic</a></li>
+                        <li><a href="video.html">Video</a></li>
+                        <li><a href="audio.html">Audio</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Work with us</a>
+                <a href="#">Advertise</a>
+                <span>© 2026 The New York Times Company</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
