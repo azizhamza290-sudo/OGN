@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business News - The New York Times</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Libre Franklin', Arial, sans-serif;
+            background: #fff;
+            color: #121212;
+            line-height: 1.5;
+        }
+
+        /* ===== SHARED STYLES ===== */
+        .utility-bar {
+            border-bottom: 1px solid #e2e2e2;
+            padding: 4px 0;
+        }
+        .utility-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .utility-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .hamburger-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .hamburger-btn span {
+            display: block;
+            width: 16px;
+            height: 2px;
+            background: #121212;
+        }
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .search-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        .edition-nav {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+        }
+        .edition-nav a {
+            color: #121212;
+            text-decoration: none;
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .edition-nav a:hover {
+            text-decoration: underline;
+        }
+        .utility-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .subscribe-btn {
+            background: #567b95;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .subscribe-btn:hover {
+            background: #4a6b82;
+        }
+        .login-link {
+            color: #121212;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        .info-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .date-info {
+            font-size: 11px;
+        }
+        .date-info .date {
+            font-weight: 600;
+            color: #121212;
+            margin-bottom: 2px;
+        }
+        .date-info .todays-paper {
+            color: #121212;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .date-info .todays-paper:hover {
+            text-decoration: underline;
+        }
+        .stock-ticker {
+            font-size: 11px;
+            color: #727272;
+            display: flex;
+            gap: 16px;
+        }
+        .stock-up { color: #2e7d32; }
+        .stock-down { color: #a81817; }
+
+        .logo-section {
+            text-align: center;
+            padding: 20px 0 12px;
+            border-bottom: 1px solid #121212;
+        }
+        .nyt-logo {
+            font-family: 'Old English Text MT', 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-size: 48px;
+            font-weight: normal;
+            text-decoration: none;
+            color: #121212;
+            display: inline-block;
