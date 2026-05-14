@@ -610,3 +610,354 @@
             .regions-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Utility Bar -->
+    <div class="utility-bar">
+        <div class="utility-content">
+            <div class="utility-left">
+                <button class="hamburger-btn" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <button class="search-btn" aria-label="Search">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="7" cy="7" r="5.5"/>
+                        <path d="M11 11l4 4"/>
+                    </svg>
+                </button>
+            </div>
+            <ul class="edition-nav">
+                <li><a href="us.html">U.S.</a></li>
+                <li><a href="international.html">International</a></li>
+                <li><a href="canada.html">Canada</a></li>
+                <li><a href="espanol.html">Español</a></li>
+                <li><a href="chinese.html">中文</a></li>
+            </ul>
+            <div class="utility-right">
+                <a href="#" class="login-link">Log In</a>
+                <button class="subscribe-btn">Subscribe for $1/Week</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Date & Stocks -->
+    <div class="info-bar">
+        <div class="date-info">
+            <div class="date">Thursday, May 14, 2026</div>
+            <a href="#" class="todays-paper">Today's Paper</a>
+        </div>
+        <div class="stock-ticker">
+            <span class="stock-up">Nasdaq +0.88%</span>
+            <span class="stock-up">S&P 500 +0.77%</span>
+            <span class="stock-down">Dow -0.15%</span>
+        </div>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo-section">
+        <a href="index.html" class="nyt-logo">The New York Times</a>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="main-nav-content">
+            <ul class="nav-links">
+                <li><a href="us.html">U.S. <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="us.html">U.S. News</a>
+                        <a href="us-politics.html">Politics</a>
+                        <a href="us-elections.html">Elections 2026</a>
+                        <a href="us-education.html">Education</a>
+                        <a href="us-health.html">Health</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="us.html">All U.S. News →</a>
+                    </div>
+                </li>
+                <li><a href="world.html" class="active">World <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="world.html">World News</a>
+                        <a href="africa.html">Africa</a>
+                        <a href="americas.html">Americas</a>
+                        <a href="asia.html">Asia</a>
+                        <a href="europe.html">Europe</a>
+                        <a href="middle-east.html">Middle East</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="world.html">All World News →</a>
+                    </div>
+                </li>
+                <li><a href="business.html">Business <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="business.html">Business News</a>
+                        <a href="economy.html">Economy</a>
+                        <a href="tech.html">Tech</a>
+                        <a href="markets.html">Markets</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="business.html">All Business →</a>
+                    </div>
+                </li>
+                <li><a href="arts.html">Arts <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="arts.html">Arts</a>
+                        <a href="books.html">Books</a>
+                        <a href="movies.html">Movies</a>
+                        <a href="music.html">Music</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="arts.html">All Arts →</a>
+                    </div>
+                </li>
+                <li><a href="lifestyle.html">Lifestyle <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="lifestyle.html">Lifestyle</a>
+                        <a href="food.html">Food</a>
+                        <a href="travel.html">Travel</a>
+                        <a href="fashion.html">Fashion</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="lifestyle.html">All Lifestyle →</a>
+                    </div>
+                </li>
+                <li><a href="opinion.html">Opinion <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="opinion.html">Opinion</a>
+                        <a href="editorials.html">Editorials</a>
+                        <a href="guest-essays.html">Guest Essays</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="opinion.html">All Opinion →</a>
+                    </div>
+                </li>
+                <li><a href="video.html">Video</a></li>
+                <li><a href="audio.html">Audio</a></li>
+                <li><a href="games.html">Games <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="wordle.html">Wordle</a>
+                        <a href="connections.html">Connections</a>
+                        <a href="crossword.html">Crossword</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="games.html">All Games →</a>
+                    </div>
+                </li>
+                <li><a href="cooking.html">Cooking</a></li>
+                <li><a href="wirecutter.html">Wirecutter</a></li>
+                <li><a href="athletic.html">The Athletic</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>World</h1>
+        <p>News, analysis and reporting from around the globe.</p>
+    </div>
+
+    <!-- Sub Navigation -->
+    <div class="sub-nav">
+        <ul class="sub-nav-links">
+            <li><a href="world.html" class="active">World News</a></li>
+            <li><a href="africa.html">Africa</a></li>
+            <li><a href="americas.html">Americas</a></li>
+            <li><a href="asia.html">Asia</a></li>
+            <li><a href="australia.html">Australia</a></li>
+            <li><a href="europe.html">Europe</a></li>
+            <li><a href="middle-east.html">Middle East</a></li>
+        </ul>
+    </div>
+
+    <!-- Regions -->
+    <section class="regions-section">
+        <div class="section-label">Browse by Region</div>
+        <div class="regions-grid">
+            <a href="africa.html" class="region-card">
+                <h3>Africa</h3>
+                <p>12 articles today</p>
+            </a>
+            <a href="americas.html" class="region-card">
+                <h3>Americas</h3>
+                <p>18 articles today</p>
+            </a>
+            <a href="asia.html" class="region-card">
+                <h3>Asia</h3>
+                <p>24 articles today</p>
+            </a>
+            <a href="europe.html" class="region-card">
+                <h3>Europe</h3>
+                <p>31 articles today</p>
+            </a>
+            <a href="middle-east.html" class="region-card">
+                <h3>Middle East</h3>
+                <p>15 articles today</p>
+            </a>
+            <a href="australia.html" class="region-card">
+                <h3>Australia</h3>
+                <p>8 articles today</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="primary-column">
+            <div class="section-label">Top World Stories</div>
+            
+            <article class="hero-story">
+                <h2><a href="#">Russia-Ukraine Conflict Enters New Phase as Peace Talks Stall</a></h2>
+                <p class="story-summary">Diplomatic efforts face mounting challenges as both sides dig in on key territorial demands, with international mediators struggling to find common ground.</p>
+                <div class="story-byline">By <a href="#">Anton Troianovski</a> and <a href="#">Marc Santora</a></div>
+                <div class="story-meta">10 MIN READ</div>
+                <img src="https://static01.nyt.com/images/2026/05/14/world/14ukraine/14ukraine-superJumbo.jpg" alt="Ukraine conflict" class="hero-image">
+                <div class="image-caption">A destroyed building in eastern Ukraine. Peace talks have made little progress in recent weeks.</div>
+            </article>
+
+            <div class="story-grid">
+                <article class="story-card">
+                    <img src="https://static01.nyt.com/images/2026/05/14/world/14israel/14israel-mediumThreeByTwo440.jpg" alt="Israel">
+                    <h3><a href="#">Israel-Gaza Cease-Fire Negotiations Resume in Cairo</a></h3>
+                    <p>Egyptian mediators host new round of talks aimed at securing lasting truce.</p>
+                    <div class="card-meta">7 MIN READ</div>
+                </article>
+                <article class="story-card">
+                    <img src="https://static01.nyt.com/images/2026/05/14/world/14china/14china-mediumThreeByTwo440.jpg" alt="China">
+                    <h3><a href="#">China's Economy Shows Signs of Slowing Growth</a></h3>
+                    <p>Latest data reveals challenges for world's second-largest economy.</p>
+                    <div class="card-meta">6 MIN READ</div>
+                </article>
+            </div>
+        </div>
+
+        <aside class="secondary-column">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Trending Globally</div>
+                <div class="sidebar-story">
+                    <h4><a href="#">UK Election Called for July</a></h4>
+                    <p>Prime Minister announces snap poll amid economic concerns.</p>
+                    <div class="sidebar-meta">UK • 1 H AGO</div>
+                </div>
+                <div class="sidebar-story">
+                    <h4><a href="#">India Heat Wave Kills Dozens</a></h4>
+                    <p>Temperatures soar above 45°C in northern states.</p>
+                    <div class="sidebar-meta">ASIA • 3 H AGO</div>
+                </div>
+                <div class="sidebar-story">
+                    <h4><a href="#">Brazil Floods Displace Thousands</a></h4>
+                    <p>Heavy rains cause worst flooding in decades.</p>
+                    <div class="sidebar-meta">AMERICAS • 5 H AGO</div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Europe</div>
+                <div class="sidebar-story">
+                    <h4><a href="#">EU Approves New Climate Package</a></h4>
+                    <p>Landmark legislation aims to cut emissions by 55% by 2030.</p>
+                    <div class="sidebar-meta">2 H AGO</div>
+                </div>
+                <div class="sidebar-story">
+                    <h4><a href="#">French Protests Over Pension Reform</a></h4>
+                    <p>Demonstrators take to streets in major cities.</p>
+                    <div class="sidebar-meta">4 H AGO</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- More Stories -->
+    <section class="more-stories">
+        <div class="section-label">More World News</div>
+        <div class="more-grid">
+            <article class="more-card">
+                <h4><a href="#">Nigeria's Oil Sector Faces Reforms</a></h4>
+                <p>New legislation aims to attract foreign investment.</p>
+                <div class="more-meta">AFRICA • 2 H AGO</div>
+            </article>
+            <article class="more-card">
+                <h4><a href="#">Japan's Population Decline Accelerates</a></h4>
+                <p>Government announces new measures to boost birth rates.</p>
+                <div class="more-meta">ASIA • 4 H AGO</div>
+            </article>
+            <article class="more-card">
+                <h4><a href="#">Saudi Arabia Hosts Regional Summit</a></h4>
+                <p>Gulf leaders gather to discuss economic cooperation.</p>
+                <div class="more-meta">MIDDLE EAST • 6 H AGO</div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">The New York Times</div>
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h5>News</h5>
+                    <ul>
+                        <li><a href="us.html">U.S.</a></li>
+                        <li><a href="world.html">World</a></li>
+                        <li><a href="business.html">Business</a></li>
+                        <li><a href="tech.html">Tech</a></li>
+                        <li><a href="politics.html">Politics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Opinion</h5>
+                    <ul>
+                        <li><a href="opinion.html">Opinion</a></li>
+                        <li><a href="editorials.html">Editorials</a></li>
+                        <li><a href="guest-essays.html">Guest Essays</a></li>
+                        <li><a href="letters.html">Letters</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Arts</h5>
+                    <ul>
+                        <li><a href="arts.html">Arts</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="music.html">Music</a></li>
+                        <li><a href="theater.html">Theater</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Living</h5>
+                    <ul>
+                        <li><a href="lifestyle.html">Lifestyle</a></li>
+                        <li><a href="food.html">Food</a></li>
+                        <li><a href="travel.html">Travel</a></li>
+                        <li><a href="fashion.html">Fashion</a></li>
+                        <li><a href="real-estate.html">Real Estate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Games</h5>
+                    <ul>
+                        <li><a href="wordle.html">Wordle</a></li>
+                        <li><a href="connections.html">Connections</a></li>
+                        <li><a href="strands.html">Strands</a></li>
+                        <li><a href="crossword.html">Crossword</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>More</h5>
+                    <ul>
+                        <li><a href="cooking.html">Cooking</a></li>
+                        <li><a href="wirecutter.html">Wirecutter</a></li>
+                        <li><a href="athletic.html">The Athletic</a></li>
+                        <li><a href="video.html">Video</a></li>
+                        <li><a href="audio.html">Audio</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Work with us</a>
+                <a href="#">Advertise</a>
+                <span>© 2026 The New York Times Company</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
