@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifestyle - The New York Times</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Libre Franklin', Arial, sans-serif;
+            background: #fff;
+            color: #121212;
+            line-height: 1.5;
+        }
+
+        /* ===== SHARED STYLES ===== */
+        .utility-bar {
+            border-bottom: 1px solid #e2e2e2;
+            padding: 4px 0;
+        }
+        .utility-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .utility-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .hamburger-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .hamburger-btn span {
+            display: block;
+            width: 16px;
+            height: 2px;
+            background: #121212;
+        }
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .search-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        .edition-nav {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+        }
+        .edition-nav a {
+            color: #121212;
+            text-decoration: none;
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .edition-nav a:hover {
+            text-decoration: underline;
+        }
+        .utility-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .subscribe-btn {
+            background: #567b95;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .subscribe-btn:hover {
+            background: #4a6b82;
+        }
+        .login-link {
+            color: #121212;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        .info-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .date-info {
+            font-size: 11px;
+        }
+        .date-info .date {
+            font-weight: 600;
+            color: #121212;
+            margin-bottom: 2px;
+        }
+        .date-info .todays-paper {
+            color: #121212;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .date-info .todays-paper:hover {
+            text-decoration: underline;
+        }
+        .stock-ticker {
+            font-size: 11px;
+            color: #727272;
+            display: flex;
+            gap: 16px;
+        }
+        .stock-up { color: #2e7d32; }
+        .stock-down { color: #a81817; }
+
+        .logo-section {
+            text-align: center;
+            padding: 20px 0 12px;
+            border-bottom: 1px solid #121212;
+        }
+        .nyt-logo {
+            font-family: 'Old English Text MT', 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-size: 48px;
+            font-weight: normal;
+            text-decoration: none;
+            color: #121212;
+            display: inline-block;
+            letter-spacing: -1px;
+        }
+
+        .main-nav {
+            border-bottom: 1px solid #121212;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 100;
+        }
+        .main-nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 0;
+        }
+        .nav-links li {
+            position: relative;
+        }
+        .nav-links a {
+            display: block;
+            padding: 10px 14px;
+            color: #121212;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+        .nav-links a:hover {
+            background: #f7f7f7;
+        }
+        .nav-links a.active {
+            font-weight: 700;
+            border-bottom: 2px solid #121212;
+        }
+        .dropdown-arrow {
+            font-size: 7px;
+            margin-left: 2px;
+            opacity: 0.6;
+        }
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            border: 1px solid #e2e2e2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-width: 220px;
+            display: none;
+            z-index: 101;
+            padding: 8px 0;
+        }
+        .nav-links li:hover .dropdown {
+            display: block;
+        }
+        .dropdown a {
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 400;
+        }
+        .dropdown a:hover {
+            background: #f7f7f7;
+            text-decoration: underline;
+        }
+        .dropdown-divider {
+            border-top: 1px solid #e2e2e2;
+            margin: 6px 0;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid #121212;
+        }
+        .page-header h1 {
+            font-family: 'Old English Text MT', 'UnifrakturMaguntia', serif;
+            font-size: 36px;
+            font-weight: normal;
+        }
+        .page-header p {
+            font-family: Georgia, serif;
+            font-size: 16px;
+            color: #555;
+            margin-top: 8px;
+        }
+
+        /* ===== SUB-NAVIGATION ===== */
+        .sub-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            border-bottom: 1px solid #e2e2e2;
+        }
+        .sub-nav-links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            padding: 12px 0;
+        }
+        .sub-nav-links a {
+            color: #121212;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .sub-nav-links a:hover {
+            text-decoration: underline;
+        }
+        .sub-nav-links a.active {
+            font-weight: 700;
+            border-bottom: 2px solid #121212;
+            padding-bottom: 12px;
+            margin-bottom: -12px;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        .primary-column {
+            border-right: 1px solid #e2e2e2;
+            padding-right: 30px;
+        }
+        .secondary-column {
+            padding-left: 10px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 16px;
+            color: #121212;
+        }
+
+        .hero-story {
+            margin-bottom: 28px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #121212;
+        }
+        .hero-story h2 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+        .hero-story h2 a {
+            color: #121212;
+            text-decoration: none;
+        }
+        .hero-story h2 a:hover {
+            color: #555;
+        }
+        .story-summary {
+            font-family: Georgia, serif;
+            font-size: 17px;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .story-byline {
+            font-size: 11px;
+            color: #727272;
+            margin-bottom: 6px;
+        }
+        .story-byline a {
+            color: #727272;
+            text-decoration: underline;
+            text-decoration-color: #e2e2e2;
+        }
+        .story-meta {
+            font-size: 11px;
+            color: #727272;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+        }
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            margin-top: 14px;
+        }
+        .image-caption {
+            font-size: 12px;
+            color: #727272;
+            margin-top: 6px;
+            text-align: right;
+            font-family: Georgia, serif;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .story-card {
+            display: flex;
+            flex-direction: column;
+        }
+        .story-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .story-card h3 {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+        .story-card h3 a {
+            color: #121212;
+            text-decoration: none;
+        }
+        .story-card h3 a:hover {
+            color: #555;
+        }
+        .story-card p {
+            font-family: Georgia, serif;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.4;
+        }
+        .card-meta {
+            font-size: 11px;
+            color: #727272;
+            margin-top: 6px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-section {
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e2e2;
+        }
+        .sidebar-section:last-child {
+            border-bottom: none;
+        }
+        .sidebar-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 14px;
+        }
+        .sidebar-story {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e2e2;
+        }
+        .sidebar-story:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .sidebar-story h4 {
+            font-family: Georgia, serif;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+        .sidebar-story h4 a {
+            color: #121212;
+            text-decoration: none;
+        }
+        .sidebar-story h4 a:hover {
+            color: #555;
+        }
+        .sidebar-story p {
+            font-family: Georgia, serif;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.4;
+        }
+        .sidebar-meta {
+            font-size: 10px;
+            color: #727272;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Guides Section */
+        .guides-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            border-top: 4px double #121212;
+        }
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .guide-card {
+            text-align: center;
+            padding: 24px 16px;
+            border: 1px solid #e2e2e2;
+            text-decoration: none;
+            color: #121212;
+            transition: all 0.2s;
+        }
+        .guide-card:hover {
+            background: #f7f7f7;
+            border-color: #121212;
+        }
+        .guide-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .guide-card p {
+            font-size: 13px;
+            color: #555;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 4px solid #121212;
+            margin-top: 60px;
+            padding: 40px 0 20px;
+            background: #f7f7f7;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-logo {
+            font-family: 'Old English Text MT', 'UnifrakturMaguntia', serif;
+            font-size: 26px;
+            margin-bottom: 24px;
+            color: #121212;
+        }
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .footer-column h5 {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+        .footer-column ul {
+            list-style: none;
+        }
+        .footer-column li {
+            margin-bottom: 6px;
+        }
+        .footer-column a {
+            color: #121212;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            border-top: 1px solid #e2e2e2;
+            padding-top: 20px;
+            font-size: 10px;
+            color: #727272;
+            text-align: center;
+        }
+        .footer-bottom a {
+            color: #727272;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .primary-column {
+                border-right: none;
+                padding-right: 0;
+            }
+            .story-grid, .guides-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-columns {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links, .sub-nav-links {
+                display: none;
+            }
+            .edition-nav {
+                display: none;
+            }
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Utility Bar -->
+    <div class="utility-bar">
+        <div class="utility-content">
+            <div class="utility-left">
+                <button class="hamburger-btn" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <button class="search-btn" aria-label="Search">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="7" cy="7" r="5.5"/>
+                        <path d="M11 11l4 4"/>
+                    </svg>
+                </button>
+            </div>
+            <ul class="edition-nav">
+                <li><a href="us.html">U.S.</a></li>
+                <li><a href="international.html">International</a></li>
+                <li><a href="canada.html">Canada</a></li>
+                <li><a href="espanol.html">Español</a></li>
+                <li><a href="chinese.html">中文</a></li>
+            </ul>
+            <div class="utility-right">
+                <a href="#" class="login-link">Log In</a>
+                <button class="subscribe-btn">Subscribe for $1/Week</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Date & Stocks -->
+    <div class="info-bar">
+        <div class="date-info">
+            <div class="date">Thursday, May 14, 2026</div>
+            <a href="#" class="todays-paper">Today's Paper</a>
+        </div>
+        <div class="stock-ticker">
+            <span class="stock-up">Nasdaq +0.88%</span>
+            <span class="stock-up">S&P 500 +0.77%</span>
+            <span class="stock-down">Dow -0.15%</span>
+        </div>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo-section">
+        <a href="index.html" class="nyt-logo">The New York Times</a>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="main-nav-content">
+            <ul class="nav-links">
+                <li><a href="us.html">U.S. <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="us.html">U.S. News</a>
+                        <a href="us-politics.html">Politics</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="us.html">All U.S. News →</a>
+                    </div>
+                </li>
+                <li><a href="world.html">World <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="world.html">World News</a>
+                        <a href="africa.html">Africa</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="world.html">All World News →</a>
+                    </div>
+                </li>
+                <li><a href="business.html">Business <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="business.html">Business News</a>
+                        <a href="economy.html">Economy</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="business.html">All Business →</a>
+                    </div>
+                </li>
+                <li><a href="arts.html">Arts <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="arts.html">Arts</a>
+                        <a href="books.html">Books</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="arts.html">All Arts →</a>
+                    </div>
+                </li>
+                <li><a href="lifestyle.html" class="active">Lifestyle <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="lifestyle.html">Lifestyle</a>
+                        <a href="food.html">Food</a>
+                        <a href="travel.html">Travel</a>
+                        <a href="fashion.html">Fashion & Style</a>
+                        <a href="real-estate.html">Real Estate</a>
+                        <a href="well.html">Well</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="lifestyle.html">All Lifestyle →</a>
+                    </div>
+                </li>
+                <li><a href="opinion.html">Opinion <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="opinion.html">Opinion</a>
+                        <a href="editorials.html">Editorials</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="opinion.html">All Opinion →</a>
+                    </div>
+                </li>
+                <li><a href="video.html">Video</a></li>
+                <li><a href="audio.html">Audio</a></li>
+                <li><a href="games.html">Games <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown">
+                        <a href="wordle.html">Wordle</a>
+                        <a href="connections.html">Connections</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="games.html">All Games →</a>
+                    </div>
+                </li>
+                <li><a href="cooking.html">Cooking</a></li>
+                <li><a href="wirecutter.html">Wirecutter</a></li>
+                <li><a href="athletic.html">The Athletic</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Lifestyle</h1>
+        <p>Food, travel, fashion, real estate and living well.</p>
+    </div>
+
+    <!-- Sub Navigation -->
+    <div class="sub-nav">
+        <ul class="sub-nav-links">
+            <li><a href="lifestyle.html" class="active">Lifestyle</a></li>
+            <li><a href="food.html">Food</a></li>
+            <li><a href="travel.html">Travel</a></li>
+            <li><a href="fashion.html">Fashion & Style</a></li>
+            <li><a href="real-estate.html">Real Estate</a></li>
+            <li><a href="well.html">Well</a></li>
+            <li><a href="love.html">Love</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="primary-column">
+            <div class="section-label">Top Lifestyle Stories</div>
+            
+            <article class="hero-story">
+                <h2><a href="#">36 Hours in Marrakesh, Morocco</a></h2>
+                <p class="story-summary">A guide to the city's best riads, souks, hidden gardens, and rooftop restaurants — plus where to find the perfect tagine.</p>
+                <div class="story-byline">By <a href="#">Shivani Vora</a></div>
+                <div class="story-meta">7 MIN READ</div>
+                <img src="https://static01.nyt.com/images/2026/05/14/travel/14travel/14travel-superJumbo.jpg" alt="Marrakesh" class="hero-image">
+                <div class="image-caption">The medina of Marrakesh. The city offers a mix of ancient traditions and modern luxury.</div>
+            </article>
+
+            <div class="story-grid">
+                <article class="story-card">
+                    <img src="https://static01.nyt.com/images/2026/05/14/dining/14food/14food-mediumThreeByTwo440.jpg" alt="Food">
+                    <h3><a href="#">What to Cook This Weekend</a></h3>
+                    <p>Fresh spring recipes that come together in under an hour, from pasta primavera to grilled salmon.</p>
+                    <div class="card-meta">COOKING • 5 MIN READ</div>
+                </article>
+                <article class="story-card">
+                    <img src="https://static01.nyt.com/images/2026/05/14/fashion/14fashion/14fashion-mediumThreeByTwo440.jpg" alt="Fashion">
+                    <h3><a href="#">The Return of Minimalism in Fashion</a></h3>
+                    <p>Designers are embracing clean lines and neutral palettes for the spring collections.</p>
+                    <div class="card-meta">FASHION • 4 MIN READ</div>
+                </article>
+            </div>
+        </div>
+
+        <aside class="secondary-column">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Real Estate</div>
+                <div class="sidebar-story">
+                    <h4><a href="#">What $2 Million Buys You in Today's Market</a></h4>
+                    <p>A look at properties across the country at this price point.</p>
+                    <div class="sidebar-meta">REAL ESTATE</div>
+                </div>
+                <div class="sidebar-story">
+                    <h4><a href="#">The Rise of Suburban Luxury</a></h4>
+                    <p>High-end developments transform commuter towns.</p>
+                    <div class="sidebar-meta">REAL ESTATE</div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Well</div>
+                <div class="sidebar-story">
+                    <h4><a href="#">The Science of Better Sleep</a></h4>
+                    <p>New research reveals how to optimize your rest.</p>
+                    <div class="sidebar-meta">WELLNESS</div>
+                </div>
+                <div class="sidebar-story">
+                    <h4><a href="#">Meditation Apps: Do They Work?</a></h4>
+                    <p>Experts weigh in on digital mindfulness tools.</p>
+                    <div class="sidebar-meta">WELLNESS</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Guides -->
+    <section class="guides-section">
+        <div class="section-label">Lifestyle Guides</div>
+        <div class="guides-grid">
+            <a href="food.html" class="guide-card">
+                <h3>🍽️ Food</h3>
+                <p>Recipes, restaurant reviews and cooking tips</p>
+            </a>
+            <a href="travel.html" class="guide-card">
+                <h3>✈️ Travel</h3>
+                <p>Destinations, guides and 36 Hours features</p>
+            </a>
+            <a href="fashion.html" class="guide-card">
+                <h3>👗 Fashion</h3>
+                <p>Style news, trends and shopping advice</p>
+            </a>
+            <a href="real-estate.html" class="guide-card">
+                <h3>🏠 Real Estate</h3>
+                <p>Market news and property listings</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">The New York Times</div>
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h5>News</h5>
+                    <ul>
+                        <li><a href="us.html">U.S.</a></li>
+                        <li><a href="world.html">World</a></li>
+                        <li><a href="business.html">Business</a></li>
+                        <li><a href="tech.html">Tech</a></li>
+                        <li><a href="politics.html">Politics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Opinion</h5>
+                    <ul>
+                        <li><a href="opinion.html">Opinion</a></li>
+                        <li><a href="editorials.html">Editorials</a></li>
+                        <li><a href="guest-essays.html">Guest Essays</a></li>
+                        <li><a href="letters.html">Letters</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Arts</h5>
+                    <ul>
+                        <li><a href="arts.html">Arts</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="music.html">Music</a></li>
+                        <li><a href="theater.html">Theater</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Living</h5>
+                    <ul>
+                        <li><a href="lifestyle.html">Lifestyle</a></li>
+                        <li><a href="food.html">Food</a></li>
+                        <li><a href="travel.html">Travel</a></li>
+                        <li><a href="fashion.html">Fashion</a></li>
+                        <li><a href="real-estate.html">Real Estate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Games</h5>
+                    <ul>
+                        <li><a href="wordle.html">Wordle</a></li>
+                        <li><a href="connections.html">Connections</a></li>
+                        <li><a href="strands.html">Strands</a></li>
+                        <li><a href="crossword.html">Crossword</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>More</h5>
+                    <ul>
+                        <li><a href="cooking.html">Cooking</a></li>
+                        <li><a href="wirecutter.html">Wirecutter</a></li>
+                        <li><a href="athletic.html">The Athletic</a></li>
+                        <li><a href="video.html">Video</a></li>
+                        <li><a href="audio.html">Audio</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Work with us</a>
+                <a href="#">Advertise</a>
+                <span>© 2026 The New York Times Company</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
